@@ -1,0 +1,1462 @@
+[
+  {
+    "TeamName": "Abilene Christian",
+    "team_id": 1
+  },
+  {
+    "TeamName": "Air Force",
+    "team_id": 2
+  },
+  {
+    "TeamName": "Akron",
+    "team_id": 3
+  },
+  {
+    "TeamName": "Alabama",
+    "team_id": 4
+  },
+  {
+    "TeamName": "Alabama A&M",
+    "team_id": 5
+  },
+  {
+    "TeamName": "Alabama St.",
+    "team_id": 6
+  },
+  {
+    "TeamName": "Albany",
+    "team_id": 7
+  },
+  {
+    "TeamName": "Alcorn St.",
+    "team_id": 8
+  },
+  {
+    "TeamName": "American",
+    "team_id": 9
+  },
+  {
+    "TeamName": "Appalachian St.",
+    "team_id": 10
+  },
+  {
+    "TeamName": "Arizona",
+    "team_id": 11
+  },
+  {
+    "TeamName": "Arizona St.",
+    "team_id": 12
+  },
+  {
+    "TeamName": "Arkansas",
+    "team_id": 13
+  },
+  {
+    "TeamName": "Little Rock",
+    "team_id": 14
+  },
+  {
+    "TeamName": "Arkansas Pine Bluff",
+    "team_id": 15
+  },
+  {
+    "TeamName": "Arkansas St.",
+    "team_id": 16
+  },
+  {
+    "TeamName": "Army",
+    "team_id": 17
+  },
+  {
+    "TeamName": "Auburn",
+    "team_id": 18
+  },
+  {
+    "TeamName": "Austin Peay",
+    "team_id": 19
+  },
+  {
+    "TeamName": "Ball St.",
+    "team_id": 20
+  },
+  {
+    "TeamName": "Baylor",
+    "team_id": 21
+  },
+  {
+    "TeamName": "Belmont",
+    "team_id": 22
+  },
+  {
+    "TeamName": "Bethune Cookman",
+    "team_id": 23
+  },
+  {
+    "TeamName": "Binghamton",
+    "team_id": 24
+  },
+  {
+    "TeamName": "Boise St.",
+    "team_id": 25
+  },
+  {
+    "TeamName": "Boston College",
+    "team_id": 26
+  },
+  {
+    "TeamName": "Boston University",
+    "team_id": 27
+  },
+  {
+    "TeamName": "Bowling Green",
+    "team_id": 28
+  },
+  {
+    "TeamName": "Bradley",
+    "team_id": 29
+  },
+  {
+    "TeamName": "Brown",
+    "team_id": 30
+  },
+  {
+    "TeamName": "Bryant",
+    "team_id": 31
+  },
+  {
+    "TeamName": "Bucknell",
+    "team_id": 32
+  },
+  {
+    "TeamName": "Buffalo",
+    "team_id": 33
+  },
+  {
+    "TeamName": "Butler",
+    "team_id": 34
+  },
+  {
+    "TeamName": "BYU",
+    "team_id": 35
+  },
+  {
+    "TeamName": "Cal Poly",
+    "team_id": 36
+  },
+  {
+    "TeamName": "Cal St. Bakersfield",
+    "team_id": 37
+  },
+  {
+    "TeamName": "Cal St. Fullerton",
+    "team_id": 38
+  },
+  {
+    "TeamName": "CSUN",
+    "team_id": 39
+  },
+  {
+    "TeamName": "California",
+    "team_id": 40
+  },
+  {
+    "TeamName": "Campbell",
+    "team_id": 41
+  },
+  {
+    "TeamName": "Canisius",
+    "team_id": 42
+  },
+  {
+    "TeamName": "Central Arkansas",
+    "team_id": 43
+  },
+  {
+    "TeamName": "Central Connecticut",
+    "team_id": 44
+  },
+  {
+    "TeamName": "Central Michigan",
+    "team_id": 45
+  },
+  {
+    "TeamName": "Charleston Southern",
+    "team_id": 46
+  },
+  {
+    "TeamName": "Charlotte",
+    "team_id": 47
+  },
+  {
+    "TeamName": "Chattanooga",
+    "team_id": 48
+  },
+  {
+    "TeamName": "Chicago St.",
+    "team_id": 49
+  },
+  {
+    "TeamName": "Cincinnati",
+    "team_id": 50
+  },
+  {
+    "TeamName": "Clemson",
+    "team_id": 51
+  },
+  {
+    "TeamName": "Cleveland St.",
+    "team_id": 52
+  },
+  {
+    "TeamName": "Coastal Carolina",
+    "team_id": 53
+  },
+  {
+    "TeamName": "Colgate",
+    "team_id": 54
+  },
+  {
+    "TeamName": "Charleston",
+    "team_id": 55
+  },
+  {
+    "TeamName": "Colorado",
+    "team_id": 56
+  },
+  {
+    "TeamName": "Colorado St.",
+    "team_id": 57
+  },
+  {
+    "TeamName": "Columbia",
+    "team_id": 58
+  },
+  {
+    "TeamName": "Connecticut",
+    "team_id": 59
+  },
+  {
+    "TeamName": "Coppin St.",
+    "team_id": 60
+  },
+  {
+    "TeamName": "Cornell",
+    "team_id": 61
+  },
+  {
+    "TeamName": "Creighton",
+    "team_id": 62
+  },
+  {
+    "TeamName": "Dartmouth",
+    "team_id": 63
+  },
+  {
+    "TeamName": "Davidson",
+    "team_id": 64
+  },
+  {
+    "TeamName": "Dayton",
+    "team_id": 65
+  },
+  {
+    "TeamName": "Delaware",
+    "team_id": 66
+  },
+  {
+    "TeamName": "Delaware St.",
+    "team_id": 67
+  },
+  {
+    "TeamName": "Denver",
+    "team_id": 68
+  },
+  {
+    "TeamName": "DePaul",
+    "team_id": 69
+  },
+  {
+    "TeamName": "Detroit Mercy",
+    "team_id": 70
+  },
+  {
+    "TeamName": "Drake",
+    "team_id": 71
+  },
+  {
+    "TeamName": "Drexel",
+    "team_id": 72
+  },
+  {
+    "TeamName": "Duke",
+    "team_id": 73
+  },
+  {
+    "TeamName": "Duquesne",
+    "team_id": 74
+  },
+  {
+    "TeamName": "East Carolina",
+    "team_id": 75
+  },
+  {
+    "TeamName": "East Tennessee St.",
+    "team_id": 76
+  },
+  {
+    "TeamName": "Eastern Illinois",
+    "team_id": 77
+  },
+  {
+    "TeamName": "Eastern Kentucky",
+    "team_id": 78
+  },
+  {
+    "TeamName": "Eastern Michigan",
+    "team_id": 79
+  },
+  {
+    "TeamName": "Eastern Washington",
+    "team_id": 80
+  },
+  {
+    "TeamName": "Elon",
+    "team_id": 81
+  },
+  {
+    "TeamName": "Evansville",
+    "team_id": 82
+  },
+  {
+    "TeamName": "Fairfield",
+    "team_id": 83
+  },
+  {
+    "TeamName": "Fairleigh Dickinson",
+    "team_id": 84
+  },
+  {
+    "TeamName": "FIU",
+    "team_id": 85
+  },
+  {
+    "TeamName": "Florida",
+    "team_id": 86
+  },
+  {
+    "TeamName": "Florida A&M",
+    "team_id": 87
+  },
+  {
+    "TeamName": "Florida Atlantic",
+    "team_id": 88
+  },
+  {
+    "TeamName": "Florida Gulf Coast",
+    "team_id": 89
+  },
+  {
+    "TeamName": "Florida St.",
+    "team_id": 90
+  },
+  {
+    "TeamName": "Fordham",
+    "team_id": 91
+  },
+  {
+    "TeamName": "Fresno St.",
+    "team_id": 92
+  },
+  {
+    "TeamName": "Furman",
+    "team_id": 93
+  },
+  {
+    "TeamName": "Gardner Webb",
+    "team_id": 94
+  },
+  {
+    "TeamName": "George Mason",
+    "team_id": 95
+  },
+  {
+    "TeamName": "George Washington",
+    "team_id": 96
+  },
+  {
+    "TeamName": "Georgetown",
+    "team_id": 97
+  },
+  {
+    "TeamName": "Georgia",
+    "team_id": 98
+  },
+  {
+    "TeamName": "Georgia Southern",
+    "team_id": 99
+  },
+  {
+    "TeamName": "Georgia St.",
+    "team_id": 100
+  },
+  {
+    "TeamName": "Georgia Tech",
+    "team_id": 101
+  },
+  {
+    "TeamName": "Gonzaga",
+    "team_id": 102
+  },
+  {
+    "TeamName": "Grambling St.",
+    "team_id": 103
+  },
+  {
+    "TeamName": "Grand Canyon",
+    "team_id": 104
+  },
+  {
+    "TeamName": "Green Bay",
+    "team_id": 105
+  },
+  {
+    "TeamName": "Hampton",
+    "team_id": 106
+  },
+  {
+    "TeamName": "Harvard",
+    "team_id": 108
+  },
+  {
+    "TeamName": "Hawaii",
+    "team_id": 109
+  },
+  {
+    "TeamName": "High Point",
+    "team_id": 110
+  },
+  {
+    "TeamName": "Hofstra",
+    "team_id": 111
+  },
+  {
+    "TeamName": "Holy Cross",
+    "team_id": 112
+  },
+  {
+    "TeamName": "Houston",
+    "team_id": 113
+  },
+  {
+    "TeamName": "Houston Christian",
+    "team_id": 114
+  },
+  {
+    "TeamName": "Howard",
+    "team_id": 115
+  },
+  {
+    "TeamName": "Idaho",
+    "team_id": 116
+  },
+  {
+    "TeamName": "Idaho St.",
+    "team_id": 117
+  },
+  {
+    "TeamName": "Illinois",
+    "team_id": 118
+  },
+  {
+    "TeamName": "Illinois Chicago",
+    "team_id": 119
+  },
+  {
+    "TeamName": "Illinois St.",
+    "team_id": 120
+  },
+  {
+    "TeamName": "Incarnate Word",
+    "team_id": 121
+  },
+  {
+    "TeamName": "Indiana",
+    "team_id": 122
+  },
+  {
+    "TeamName": "Indiana St.",
+    "team_id": 123
+  },
+  {
+    "TeamName": "Iona",
+    "team_id": 124
+  },
+  {
+    "TeamName": "Iowa",
+    "team_id": 125
+  },
+  {
+    "TeamName": "Iowa St.",
+    "team_id": 126
+  },
+  {
+    "TeamName": "Purdue Fort Wayne",
+    "team_id": 127
+  },
+  {
+    "TeamName": "IU Indy",
+    "team_id": 128
+  },
+  {
+    "TeamName": "Jackson St.",
+    "team_id": 129
+  },
+  {
+    "TeamName": "Jacksonville",
+    "team_id": 130
+  },
+  {
+    "TeamName": "Jacksonville St.",
+    "team_id": 131
+  },
+  {
+    "TeamName": "James Madison",
+    "team_id": 132
+  },
+  {
+    "TeamName": "Kansas",
+    "team_id": 133
+  },
+  {
+    "TeamName": "Kansas St.",
+    "team_id": 134
+  },
+  {
+    "TeamName": "Kennesaw St.",
+    "team_id": 135
+  },
+  {
+    "TeamName": "Kent St.",
+    "team_id": 136
+  },
+  {
+    "TeamName": "Kentucky",
+    "team_id": 137
+  },
+  {
+    "TeamName": "La Salle",
+    "team_id": 138
+  },
+  {
+    "TeamName": "Lafayette",
+    "team_id": 139
+  },
+  {
+    "TeamName": "Lamar",
+    "team_id": 140
+  },
+  {
+    "TeamName": "Lehigh",
+    "team_id": 141
+  },
+  {
+    "TeamName": "Liberty",
+    "team_id": 142
+  },
+  {
+    "TeamName": "Lipscomb",
+    "team_id": 143
+  },
+  {
+    "TeamName": "LIU",
+    "team_id": 144
+  },
+  {
+    "TeamName": "Long Beach St.",
+    "team_id": 145
+  },
+  {
+    "TeamName": "Longwood",
+    "team_id": 146
+  },
+  {
+    "TeamName": "Louisiana",
+    "team_id": 147
+  },
+  {
+    "TeamName": "Louisiana Monroe",
+    "team_id": 148
+  },
+  {
+    "TeamName": "Louisiana Tech",
+    "team_id": 149
+  },
+  {
+    "TeamName": "Louisville",
+    "team_id": 150
+  },
+  {
+    "TeamName": "Loyola Chicago",
+    "team_id": 151
+  },
+  {
+    "TeamName": "Loyola Marymount",
+    "team_id": 152
+  },
+  {
+    "TeamName": "Loyola MD",
+    "team_id": 153
+  },
+  {
+    "TeamName": "LSU",
+    "team_id": 154
+  },
+  {
+    "TeamName": "Maine",
+    "team_id": 155
+  },
+  {
+    "TeamName": "Manhattan",
+    "team_id": 156
+  },
+  {
+    "TeamName": "Marist",
+    "team_id": 157
+  },
+  {
+    "TeamName": "Marquette",
+    "team_id": 158
+  },
+  {
+    "TeamName": "Marshall",
+    "team_id": 159
+  },
+  {
+    "TeamName": "Maryland",
+    "team_id": 160
+  },
+  {
+    "TeamName": "Maryland Eastern Shore",
+    "team_id": 161
+  },
+  {
+    "TeamName": "Massachusetts",
+    "team_id": 162
+  },
+  {
+    "TeamName": "McNeese",
+    "team_id": 163
+  },
+  {
+    "TeamName": "Memphis",
+    "team_id": 164
+  },
+  {
+    "TeamName": "Mercer",
+    "team_id": 165
+  },
+  {
+    "TeamName": "Miami FL",
+    "team_id": 166
+  },
+  {
+    "TeamName": "Miami OH",
+    "team_id": 167
+  },
+  {
+    "TeamName": "Michigan",
+    "team_id": 168
+  },
+  {
+    "TeamName": "Michigan St.",
+    "team_id": 169
+  },
+  {
+    "TeamName": "Middle Tennessee",
+    "team_id": 170
+  },
+  {
+    "TeamName": "Milwaukee",
+    "team_id": 171
+  },
+  {
+    "TeamName": "Minnesota",
+    "team_id": 172
+  },
+  {
+    "TeamName": "Mississippi",
+    "team_id": 173
+  },
+  {
+    "TeamName": "Mississippi St.",
+    "team_id": 174
+  },
+  {
+    "TeamName": "Mississippi Valley St.",
+    "team_id": 175
+  },
+  {
+    "TeamName": "Missouri",
+    "team_id": 176
+  },
+  {
+    "TeamName": "Missouri St.",
+    "team_id": 177
+  },
+  {
+    "TeamName": "Monmouth",
+    "team_id": 178
+  },
+  {
+    "TeamName": "Montana",
+    "team_id": 179
+  },
+  {
+    "TeamName": "Montana St.",
+    "team_id": 180
+  },
+  {
+    "TeamName": "Morehead St.",
+    "team_id": 181
+  },
+  {
+    "TeamName": "Morgan St.",
+    "team_id": 182
+  },
+  {
+    "TeamName": "Mount St. Mary's",
+    "team_id": 183
+  },
+  {
+    "TeamName": "Murray St.",
+    "team_id": 184
+  },
+  {
+    "TeamName": "Navy",
+    "team_id": 185
+  },
+  {
+    "TeamName": "Nebraska",
+    "team_id": 186
+  },
+  {
+    "TeamName": "Nebraska Omaha",
+    "team_id": 187
+  },
+  {
+    "TeamName": "Nevada",
+    "team_id": 188
+  },
+  {
+    "TeamName": "New Hampshire",
+    "team_id": 189
+  },
+  {
+    "TeamName": "New Mexico",
+    "team_id": 190
+  },
+  {
+    "TeamName": "New Mexico St.",
+    "team_id": 191
+  },
+  {
+    "TeamName": "New Orleans",
+    "team_id": 192
+  },
+  {
+    "TeamName": "Niagara",
+    "team_id": 193
+  },
+  {
+    "TeamName": "Nicholls",
+    "team_id": 194
+  },
+  {
+    "TeamName": "NJIT",
+    "team_id": 195
+  },
+  {
+    "TeamName": "Norfolk St.",
+    "team_id": 196
+  },
+  {
+    "TeamName": "North Carolina",
+    "team_id": 197
+  },
+  {
+    "TeamName": "North Carolina A&T",
+    "team_id": 198
+  },
+  {
+    "TeamName": "North Carolina Central",
+    "team_id": 199
+  },
+  {
+    "TeamName": "N.C. State",
+    "team_id": 200
+  },
+  {
+    "TeamName": "North Dakota",
+    "team_id": 201
+  },
+  {
+    "TeamName": "North Dakota St.",
+    "team_id": 202
+  },
+  {
+    "TeamName": "North Florida",
+    "team_id": 203
+  },
+  {
+    "TeamName": "North Texas",
+    "team_id": 204
+  },
+  {
+    "TeamName": "Northeastern",
+    "team_id": 205
+  },
+  {
+    "TeamName": "Northern Arizona",
+    "team_id": 206
+  },
+  {
+    "TeamName": "Northern Colorado",
+    "team_id": 207
+  },
+  {
+    "TeamName": "Northern Illinois",
+    "team_id": 208
+  },
+  {
+    "TeamName": "Northern Iowa",
+    "team_id": 209
+  },
+  {
+    "TeamName": "Northern Kentucky",
+    "team_id": 210
+  },
+  {
+    "TeamName": "Northwestern",
+    "team_id": 211
+  },
+  {
+    "TeamName": "Northwestern St.",
+    "team_id": 212
+  },
+  {
+    "TeamName": "Notre Dame",
+    "team_id": 213
+  },
+  {
+    "TeamName": "Oakland",
+    "team_id": 214
+  },
+  {
+    "TeamName": "Ohio",
+    "team_id": 215
+  },
+  {
+    "TeamName": "Ohio St.",
+    "team_id": 216
+  },
+  {
+    "TeamName": "Oklahoma",
+    "team_id": 217
+  },
+  {
+    "TeamName": "Oklahoma St.",
+    "team_id": 218
+  },
+  {
+    "TeamName": "Old Dominion",
+    "team_id": 219
+  },
+  {
+    "TeamName": "Oral Roberts",
+    "team_id": 220
+  },
+  {
+    "TeamName": "Oregon",
+    "team_id": 221
+  },
+  {
+    "TeamName": "Oregon St.",
+    "team_id": 222
+  },
+  {
+    "TeamName": "Pacific",
+    "team_id": 223
+  },
+  {
+    "TeamName": "Penn",
+    "team_id": 224
+  },
+  {
+    "TeamName": "Penn St.",
+    "team_id": 225
+  },
+  {
+    "TeamName": "Pepperdine",
+    "team_id": 226
+  },
+  {
+    "TeamName": "Pittsburgh",
+    "team_id": 227
+  },
+  {
+    "TeamName": "Portland",
+    "team_id": 228
+  },
+  {
+    "TeamName": "Portland St.",
+    "team_id": 229
+  },
+  {
+    "TeamName": "Prairie View A&M",
+    "team_id": 230
+  },
+  {
+    "TeamName": "Presbyterian",
+    "team_id": 231
+  },
+  {
+    "TeamName": "Princeton",
+    "team_id": 232
+  },
+  {
+    "TeamName": "Providence",
+    "team_id": 233
+  },
+  {
+    "TeamName": "Purdue",
+    "team_id": 234
+  },
+  {
+    "TeamName": "Quinnipiac",
+    "team_id": 235
+  },
+  {
+    "TeamName": "Radford",
+    "team_id": 236
+  },
+  {
+    "TeamName": "Rhode Island",
+    "team_id": 237
+  },
+  {
+    "TeamName": "Rice",
+    "team_id": 238
+  },
+  {
+    "TeamName": "Richmond",
+    "team_id": 239
+  },
+  {
+    "TeamName": "Rider",
+    "team_id": 240
+  },
+  {
+    "TeamName": "Robert Morris",
+    "team_id": 241
+  },
+  {
+    "TeamName": "Rutgers",
+    "team_id": 242
+  },
+  {
+    "TeamName": "Sacramento St.",
+    "team_id": 243
+  },
+  {
+    "TeamName": "Sacred Heart",
+    "team_id": 244
+  },
+  {
+    "TeamName": "Saint Joseph's",
+    "team_id": 245
+  },
+  {
+    "TeamName": "Saint Louis",
+    "team_id": 246
+  },
+  {
+    "TeamName": "Saint Mary's",
+    "team_id": 247
+  },
+  {
+    "TeamName": "Saint Peter's",
+    "team_id": 248
+  },
+  {
+    "TeamName": "Sam Houston St.",
+    "team_id": 249
+  },
+  {
+    "TeamName": "Samford",
+    "team_id": 250
+  },
+  {
+    "TeamName": "San Diego",
+    "team_id": 251
+  },
+  {
+    "TeamName": "San Diego St.",
+    "team_id": 252
+  },
+  {
+    "TeamName": "San Francisco",
+    "team_id": 253
+  },
+  {
+    "TeamName": "San Jose St.",
+    "team_id": 254
+  },
+  {
+    "TeamName": "Santa Clara",
+    "team_id": 255
+  },
+  {
+    "TeamName": "Seattle",
+    "team_id": 257
+  },
+  {
+    "TeamName": "Seton Hall",
+    "team_id": 258
+  },
+  {
+    "TeamName": "Siena",
+    "team_id": 259
+  },
+  {
+    "TeamName": "SIUE",
+    "team_id": 260
+  },
+  {
+    "TeamName": "SMU",
+    "team_id": 261
+  },
+  {
+    "TeamName": "South Alabama",
+    "team_id": 262
+  },
+  {
+    "TeamName": "South Carolina",
+    "team_id": 263
+  },
+  {
+    "TeamName": "South Carolina St.",
+    "team_id": 264
+  },
+  {
+    "TeamName": "South Dakota",
+    "team_id": 265
+  },
+  {
+    "TeamName": "South Dakota St.",
+    "team_id": 266
+  },
+  {
+    "TeamName": "South Florida",
+    "team_id": 267
+  },
+  {
+    "TeamName": "Southeast Missouri",
+    "team_id": 268
+  },
+  {
+    "TeamName": "Southeastern Louisiana",
+    "team_id": 269
+  },
+  {
+    "TeamName": "Southern",
+    "team_id": 270
+  },
+  {
+    "TeamName": "Southern Illinois",
+    "team_id": 271
+  },
+  {
+    "TeamName": "Southern Miss",
+    "team_id": 272
+  },
+  {
+    "TeamName": "Southern Utah",
+    "team_id": 273
+  },
+  {
+    "TeamName": "St. Bonaventure",
+    "team_id": 274
+  },
+  {
+    "TeamName": "Saint Francis",
+    "team_id": 276
+  },
+  {
+    "TeamName": "St. John's",
+    "team_id": 277
+  },
+  {
+    "TeamName": "Stanford",
+    "team_id": 278
+  },
+  {
+    "TeamName": "Stephen F. Austin",
+    "team_id": 279
+  },
+  {
+    "TeamName": "Stetson",
+    "team_id": 280
+  },
+  {
+    "TeamName": "Stony Brook",
+    "team_id": 281
+  },
+  {
+    "TeamName": "Syracuse",
+    "team_id": 282
+  },
+  {
+    "TeamName": "TCU",
+    "team_id": 283
+  },
+  {
+    "TeamName": "Temple",
+    "team_id": 284
+  },
+  {
+    "TeamName": "Tennessee",
+    "team_id": 285
+  },
+  {
+    "TeamName": "Tennessee Martin",
+    "team_id": 286
+  },
+  {
+    "TeamName": "Tennessee St.",
+    "team_id": 287
+  },
+  {
+    "TeamName": "Tennessee Tech",
+    "team_id": 288
+  },
+  {
+    "TeamName": "Texas",
+    "team_id": 289
+  },
+  {
+    "TeamName": "Texas A&M",
+    "team_id": 290
+  },
+  {
+    "TeamName": "Texas A&M Corpus Chris",
+    "team_id": 291
+  },
+  {
+    "TeamName": "Texas Southern",
+    "team_id": 292
+  },
+  {
+    "TeamName": "Texas St.",
+    "team_id": 293
+  },
+  {
+    "TeamName": "Texas Tech",
+    "team_id": 294
+  },
+  {
+    "TeamName": "The Citadel",
+    "team_id": 295
+  },
+  {
+    "TeamName": "Toledo",
+    "team_id": 296
+  },
+  {
+    "TeamName": "Towson",
+    "team_id": 297
+  },
+  {
+    "TeamName": "Troy",
+    "team_id": 298
+  },
+  {
+    "TeamName": "Tulane",
+    "team_id": 299
+  },
+  {
+    "TeamName": "Tulsa",
+    "team_id": 300
+  },
+  {
+    "TeamName": "UAB",
+    "team_id": 301
+  },
+  {
+    "TeamName": "UC Davis",
+    "team_id": 302
+  },
+  {
+    "TeamName": "UC Irvine",
+    "team_id": 303
+  },
+  {
+    "TeamName": "UC Riverside",
+    "team_id": 304
+  },
+  {
+    "TeamName": "UC Santa Barbara",
+    "team_id": 305
+  },
+  {
+    "TeamName": "UCF",
+    "team_id": 306
+  },
+  {
+    "TeamName": "UCLA",
+    "team_id": 307
+  },
+  {
+    "TeamName": "UMass Lowell",
+    "team_id": 308
+  },
+  {
+    "TeamName": "UMBC",
+    "team_id": 309
+  },
+  {
+    "TeamName": "Kansas City",
+    "team_id": 310
+  },
+  {
+    "TeamName": "UNC Asheville",
+    "team_id": 311
+  },
+  {
+    "TeamName": "UNC Greensboro",
+    "team_id": 312
+  },
+  {
+    "TeamName": "UNC Wilmington",
+    "team_id": 313
+  },
+  {
+    "TeamName": "UNLV",
+    "team_id": 314
+  },
+  {
+    "TeamName": "USC",
+    "team_id": 315
+  },
+  {
+    "TeamName": "USC Upstate",
+    "team_id": 316
+  },
+  {
+    "TeamName": "UT Arlington",
+    "team_id": 317
+  },
+  {
+    "TeamName": "UT Rio Grande Valley",
+    "team_id": 318
+  },
+  {
+    "TeamName": "Utah",
+    "team_id": 319
+  },
+  {
+    "TeamName": "Utah St.",
+    "team_id": 320
+  },
+  {
+    "TeamName": "Utah Valley",
+    "team_id": 321
+  },
+  {
+    "TeamName": "UTEP",
+    "team_id": 322
+  },
+  {
+    "TeamName": "UTSA",
+    "team_id": 323
+  },
+  {
+    "TeamName": "Valparaiso",
+    "team_id": 324
+  },
+  {
+    "TeamName": "Vanderbilt",
+    "team_id": 325
+  },
+  {
+    "TeamName": "VCU",
+    "team_id": 326
+  },
+  {
+    "TeamName": "Vermont",
+    "team_id": 327
+  },
+  {
+    "TeamName": "Villanova",
+    "team_id": 328
+  },
+  {
+    "TeamName": "Virginia",
+    "team_id": 329
+  },
+  {
+    "TeamName": "Virginia Tech",
+    "team_id": 330
+  },
+  {
+    "TeamName": "VMI",
+    "team_id": 331
+  },
+  {
+    "TeamName": "Wagner",
+    "team_id": 332
+  },
+  {
+    "TeamName": "Wake Forest",
+    "team_id": 333
+  },
+  {
+    "TeamName": "Washington",
+    "team_id": 334
+  },
+  {
+    "TeamName": "Washington St.",
+    "team_id": 335
+  },
+  {
+    "TeamName": "Weber St.",
+    "team_id": 336
+  },
+  {
+    "TeamName": "West Virginia",
+    "team_id": 337
+  },
+  {
+    "TeamName": "Western Carolina",
+    "team_id": 338
+  },
+  {
+    "TeamName": "Western Illinois",
+    "team_id": 339
+  },
+  {
+    "TeamName": "Western Kentucky",
+    "team_id": 340
+  },
+  {
+    "TeamName": "Western Michigan",
+    "team_id": 341
+  },
+  {
+    "TeamName": "Wichita St.",
+    "team_id": 342
+  },
+  {
+    "TeamName": "William & Mary",
+    "team_id": 343
+  },
+  {
+    "TeamName": "Winthrop",
+    "team_id": 344
+  },
+  {
+    "TeamName": "Wisconsin",
+    "team_id": 345
+  },
+  {
+    "TeamName": "Wofford",
+    "team_id": 346
+  },
+  {
+    "TeamName": "Wright St.",
+    "team_id": 347
+  },
+  {
+    "TeamName": "Wyoming",
+    "team_id": 348
+  },
+  {
+    "TeamName": "Xavier",
+    "team_id": 349
+  },
+  {
+    "TeamName": "Yale",
+    "team_id": 350
+  },
+  {
+    "TeamName": "Youngstown St.",
+    "team_id": 351
+  },
+  {
+    "TeamName": "North Alabama",
+    "team_id": 356
+  },
+  {
+    "TeamName": "Cal Baptist",
+    "team_id": 357
+  },
+  {
+    "TeamName": "Merrimack",
+    "team_id": 359
+  },
+  {
+    "TeamName": "Bellarmine",
+    "team_id": 360
+  },
+  {
+    "TeamName": "Utah Tech",
+    "team_id": 361
+  },
+  {
+    "TeamName": "Tarleton St.",
+    "team_id": 362
+  },
+  {
+    "TeamName": "UC San Diego",
+    "team_id": 363
+  },
+  {
+    "TeamName": "St. Thomas",
+    "team_id": 364
+  },
+  {
+    "TeamName": "Southern Indiana",
+    "team_id": 365
+  },
+  {
+    "TeamName": "Stonehill",
+    "team_id": 366
+  },
+  {
+    "TeamName": "Queens",
+    "team_id": 367
+  },
+  {
+    "TeamName": "Lindenwood",
+    "team_id": 368
+  },
+  {
+    "TeamName": "East Texas A&M",
+    "team_id": 369
+  },
+  {
+    "TeamName": "Le Moyne",
+    "team_id": 370
+  },
+  {
+    "TeamName": "Mercyhurst",
+    "team_id": 371
+  },
+  {
+    "TeamName": "West Georgia",
+    "team_id": 372
+  },
+  {
+    "TeamName": "New Haven",
+    "team_id": 373
+  }
+]
