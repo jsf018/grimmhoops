@@ -1530,10 +1530,10 @@
     "HOME_ID": 200,
     "AWAY": "VCU",
     "AWAY_ID": 326,
-    "FAV_ID": "",
-    "SPREAD": "",
-    "HOME__1": "",
-    "AWAY__1": ""
+    "FAV_ID": 200,
+    "SPREAD": 11.5,
+    "HOME__1": 85,
+    "AWAY__1": 79
   },
   {
     "GAME": 129,
