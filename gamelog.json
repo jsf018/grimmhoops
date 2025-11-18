@@ -1566,10 +1566,10 @@
     "HOME_ID": 214,
     "AWAY": "UCF",
     "AWAY_ID": 306,
-    "FAV_ID": "",
-    "SPREAD": "",
-    "HOME__1": "",
-    "AWAY__1": ""
+    "FAV_ID": 306
+    "SPREAD": 13.5,
+    "HOME__1": 83,
+    "AWAY__1": 87
   },
   {
     "GAME": 132,
