@@ -1518,10 +1518,10 @@
     "HOME_ID": 102,
     "AWAY": "Southern Utah",
     "AWAY_ID": 273,
-    "FAV_ID": "",
-    "SPREAD": "",
-    "HOME__1": "",
-    "AWAY__1": ""
+    "FAV_ID": 102,
+    "SPREAD": 35.5,
+    "HOME__1": 122,
+    "AWAY__1": 50
   },
   {
     "GAME": 128,
