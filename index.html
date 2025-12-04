@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Grimm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#0a0a0a; --fg:#f8fafc; --muted:#94a3b8; --line:#1f2937; --card:#0f1115; --elev:#111318; --pos:#10b981; --neg:#ef4444; }
+  .light{ --bg:#ffffff; --fg:#0b1220; --muted:#6b7280; --line:#e5e7eb; --card:#ffffff; --elev:#f8fafc; }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;line-height:1.45}
+  .container{max-width:1200px;margin:0 auto;padding:16px}
+  header{position:sticky;top:0;z-index:10;background:color-mix(in oklab, var(--bg) 92%, transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:8px;padding:10px 0}
+  .logo{width:18px;height:18px;border:1px solid var(--fg);border-radius:4px;display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:700}
+  .title{font-weight:600}
+  .btn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--fg);padding:8px 12px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer}
+  .btn:hover{border-color:color-mix(in oklab, var(--fg) 18%, var(--line))}
+  .btn.active{border-color:var(--fg)} .spacer{flex:1}
+  .page{display:none;padding:14px 0} .page.active{display:block}
+  .grid{display:grid;gap:12px} .grid.c2{grid-template-columns:repeat(2,minmax(0,1fr))} .grid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  @media (max-width:900px){.grid.c2,.grid.c3{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+  .card h2{margin:0 0 8px 0;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{padding:10px 8px;border-bottom:1px solid var(--line)} th{text-align:left;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  #kenpomTable th,#kenpomTable td{padding:8px 6px}
+  tr:hover td{background:var(--elev)} .mono{font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+  .pos{color:var(--pos)} .neg{color:var(--neg)}
+  .badge{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:20px;padding:0 8px;border:1px solid var(--line);border-radius:999px;font-weight:700;font-size:11px;line-height:1}
+  .chip{padding:6px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;cursor:pointer;background:var(--card);color:var(--fg)} .chip.active{border-color:var(--fg)}
+  .selection{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+  .sel{display:flex;gap:8px;padding:8px;border:1px solid var(--line);border-radius:10px;align-items:center;background:var(--card)} .sel input{accent-color:var(--fg);cursor:pointer}
+  .sel.benched{opacity:0.4}
+  .form-row{display:grid;grid-template-columns:120px 1fr 120px;gap:8px;align-items:center;margin-bottom:8px}
+  .input{width:100%;padding:8px 10px;background:var(--elev);color:var(--fg);border:1px solid var(--line);border-radius:8px;font-size:12px}
+  .game-card{background:var(--card);border:1.5px solid var(--fg);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+  .game-teams{display:flex;flex-direction:column;gap:6px}
+  .game-team{display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;transition:background .15s}
+  .game-team.winner{background:var(--elev);border-left:3px solid var(--pos)}
+  .game-team-name{display:flex;align-items:center;gap:6px;font-weight:500;color:var(--fg)}
+  .game-score{font-size:16px;font-weight:700;font-family:"IBM Plex Mono",monospace}
+  .game-info{display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1.5px solid var(--fg);font-size:13px;color:var(--fg);font-weight:500}
+  .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+  @media (max-width:640px){.games-grid{grid-template-columns:1fr}}
+  .team-logo{width:28px;height:28px;object-fit:contain;vertical-align:middle;margin-right:4px}
+  .view-toggle{display:flex;gap:8px;margin-bottom:12px}
+  
+  /* KenPom styles */
+  .kenpom-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px}
+  .kenpom-stat-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+  .kenpom-stat-label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  .kenpom-stat-value{color:var(--fg);font-size:20px;font-weight:700;font-family:"IBM Plex Mono",monospace}
+  .kenpom-controls{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+  .kenpom-team-cell{display:flex;align-items:center;gap:8px}
+  .kenpom-team-logo{width:24px;height:24px;border-radius:6px;object-fit:cover;background:var(--elev)}
+  .kenpom-team-info{display:flex;flex-direction:column}
+  .kenpom-team-name{font-weight:500}
+  .kenpom-team-record{color:var(--muted);font-size:10px}
+  .kenpom-loading{text-align:center;padding:40px}
+  .kenpom-spinner{width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--fg);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .kenpom-error{background:color-mix(in oklab, #ef4444 10%, var(--card));border:1px solid color-mix(in oklab, #ef4444 30%, var(--line));border-radius:12px;padding:16px;color:#ef4444;text-align:center}
+  th.sortable{cursor:pointer;user-select:none}
+  th.sortable::after{content:' ↕';opacity:.3;font-size:10px}
+  th.sorted-asc::after{content:' ↑';opacity:1}
+  th.sorted-desc::after{content:' ↓';opacity:1}
+  #kenpomTable thead{position:sticky;top:0;z-index:5;background:var(--card);box-shadow:0 1px 0 var(--line)}
+  #kenpomTable thead th{background:var(--card)}
+  
+  /* Transactions styles */
+  #transactionsTable td{vertical-align:middle}
+  #transactionsTable .team-cell{display:flex;align-items:center;gap:4px}
+  
+  /* Info icon for N/A tooltips */
+  .info-icon{cursor:help;color:var(--muted);font-size:12px;opacity:0.7}
+  .info-icon:hover{opacity:1}
+
+</style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand"><div class="logo">Φ</div><div class="title mono">GRIMM</div></div>
+      <nav>
+        <button class="btn active" data-page="standings">Standings</button>
+        <button class="btn" data-page="managers">Managers</button>
+        <button class="btn" data-page="schedule">Schedule</button>
+        <button class="btn" data-page="transactions">Transactions</button>
+        <button class="btn" data-page="kenpom">KenPom</button>
+        <button class="btn" data-page="settings">Settings</button>
+      </nav>
+      <div class="spacer"></div>
+      <button class="btn" id="themeToggle" title="Toggle theme">◑</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="standings" class="page active">
+      <div class="view-toggle">
+        <button class="chip active" id="seasonViewBtn">Season Standings</button>
+        <button class="chip" id="weeklyViewBtn">Weekly Standings</button>
+      </div>
+      <div id="seasonView">
+        <div class="grid c2">
+          <div class="card">
+            <h2>League Standings</h2>
+            <table id="standingsTable"><thead><tr>
+              <th>Rank</th><th>Manager</th><th>Points</th><th>ATS Diff.</th><th>Record</th>
+            </tr></thead><tbody></tbody></table>
+          </div>
+          <div class="card">
+            <h2>Head‑to‑Head</h2>
+            <div id="h2hRecords" class="grid c2"></div>
+          </div>
+        </div>
+      </div>
+      <div id="weeklyView" style="display:none">
+        <div class="card">
+          <div style="display:flex;gap:8px;margin-bottom:12px" id="weekStandingsSelector"></div>
+          <h2>Week <span id="currentWeekNum">1</span> Standings</h2>
+          <table id="weeklyStandingsTable"><thead><tr>
+            <th>Rank</th><th>Manager</th><th>Week Pts</th><th>Season Pts</th><th>Record</th>
+          </tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section id="managers" class="page">
+      <div style="display:flex;gap:8px;margin-bottom:12px;align-items:center">
+        <span style="color:var(--muted);font-size:12px">View:</span>
+        <button class="chip active" id="fullRosterBtn">Full Roster</button>
+        <div id="weekManagerSelector" style="display:flex;gap:8px"></div>
+      </div>
+      <div id="managersList" class="grid c2"></div>
+    </section>
+
+    <section id="teamDetail" class="page">
+      <a href="#" class="btn" data-page="managers">← Back</a>
+      <div id="teamDetailContent" class="card" style="margin-top:12px"></div>
+    </section>
+
+    <section id="schedule" class="page">
+      <div class="card">
+        <h2>Weekly Schedule</h2>
+        <div id="weekSelector" class="week-tabs" style="display:flex;gap:8px;margin-bottom:10px"></div>
+        <div id="scheduleContent" class="grid"></div>
+      </div>
+    </section>
+
+    <section id="transactions" class="page">
+      <div class="card">
+        <h2>Transaction History</h2>
+        <div style="display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap">
+          <span style="color:var(--muted);font-size:12px">Filter:</span>
+          <button class="chip active" id="txnAllBtn">All</button>
+          <button class="chip" id="txnJFBtn">JF</button>
+          <button class="chip" id="txnJRBtn">JR</button>
+          <button class="chip" id="txnJSBtn">JS</button>
+          <button class="chip" id="txnGKBtn">GK</button>
+        </div>
+        <table id="transactionsTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Manager</th>
+              <th>Conference</th>
+              <th>Dropped</th>
+              <th>Added</th>
+            </tr>
+          </thead>
+          <tbody id="transactionsList"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="kenpom" class="page">
+      <div class="card">
+        <h2>KenPom Rankings</h2>
+        <div class="kenpom-controls">
+          <select id="kenpomSeason" class="input" style="width:150px">
+            <option value="2026">2025-26 Season</option>
+            <option value="2025">2024-25 Season</option>
+            <option value="2024">2023-24 Season</option>
+            <option value="2023">2022-23 Season</option>
+          </select>
+          <select id="kenpomConference" class="input" style="width:180px">
+            <option value="">All Conferences</option>
+          </select>
+          <button class="btn" id="loadKenpom">Load Rankings</button>
+        </div>
+        <div id="kenpomStats"></div>
+        <div id="kenpomTable"></div>
+      </div>
+    </section>
+
+    <section id="settings" class="page">
+      <div class="grid">
+        <div class="card">
+          <h2>League Managers</h2>
+          <div id="managerSettings"></div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" id="saveManagers">Save Manager Settings</button>
+            <button class="btn" id="randomColors">Randomize Colors</button>
+            <button class="btn" id="resetColors">Reset Colors</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+/***** THEME & NAV *****/
+(function(){
+  const savedTheme = localStorage.getItem('theme');
+  if(savedTheme === 'light'){ document.body.classList.add('light'); }
+  document.getElementById('themeToggle')?.addEventListener('click', ()=>{
+    document.body.classList.toggle('light');
+    localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+  });
+})();
+
+function showPage(id){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById(id)?.classList.add('active'); document.querySelectorAll('nav .btn').forEach(b=>{ b.classList.toggle('active', b.dataset.page===id); }); }
+[...document.querySelectorAll('[data-page]')].forEach(b=>b.addEventListener('click',e=>{const id=b.dataset.page;if(id){e.preventDefault();showPage(id)}}));
+
+/***** DATA *****/
+let teamIdData = {}; let teamIdArray = []; let rosterData = {}; let gameLogData = []; let activeRosters = {}; let transactionsData = [];
+const idToTeam = {};
+const teamToId = {};
+let managerMeta = JSON.parse(localStorage.getItem('managerMeta')) || { JF:{name:'J. Falter', color:'#ffffff'}, JR:{name:'J. Rothenberg', color:'#ffffff'}, JS:{name:'J. Schaefer', color:'#ffffff'}, GK:{name:'G. Kalan', color:'#ffffff'} };
+let currentManagerWeek = 'full'; // 'full' or 'Week 1', 'Week 2', etc.
+let weekToDateMap = {}; // Maps "Week 1" -> "2025-10-27" (Monday of that week)
+let currentTxnFilter = 'All'; // Transaction filter
+
+function updateIdToTeam(){ 
+  Object.keys(idToTeam).forEach(k=>delete idToTeam[k]); 
+  Object.keys(teamToId).forEach(k=>delete teamToId[k]); 
+  Object.entries(teamIdData).forEach(([k,v])=>{
+    idToTeam[v]=k;
+    teamToId[k]=v;
+  }); 
+}
+
+function getManagerForTeam(teamId, week){ 
+  if(!week) return null;
+  for(const [m,weeks] of Object.entries(rosterData)){ 
+    if(weeks[week] && weeks[week].includes(teamId)) return m; 
+  } 
+  return null; 
+}
+function getManagerName(m){ return managerMeta[m]?.name || m; }
+function getManagerColor(m){ return managerMeta[m]?.color || '#444444'; }
+function teamWithLogo(teamId, teamName){ return `<img src="logos/${teamId}.webp" alt="" class="team-logo" onerror="this.style.display='none'"/>${teamName}`; }
+
+// Build week-to-date mapping from game log
+function buildWeekMapping(){
+  weekToDateMap = {};
+  const dates = [...new Set(gameLogData.map(g=>g.DATE))].sort();
+  dates.forEach(dateStr => {
+    const d = new Date(dateStr);
+    if(isNaN(d)) return;
+    const monday = new Date(d);
+    monday.setDate(d.getDate()-((d.getDay()+6)%7));
+    const mondayKey = monday.toISOString().split('T')[0];
+    if(!Object.values(weekToDateMap).includes(mondayKey)){
+      const weekNum = Object.keys(weekToDateMap).length + 1;
+      weekToDateMap[`Week ${weekNum}`] = mondayKey;
+    }
+  });
+}
+
+// Get week for a game date
+function getWeekForDate(dateStr){
+  const d = new Date(dateStr);
+  if(isNaN(d)) return null;
+  const monday = new Date(d);
+  monday.setDate(d.getDate()-((d.getDay()+6)%7));
+  const mondayKey = monday.toISOString().split('T')[0];
+  for(const [week, weekMonday] of Object.entries(weekToDateMap)){
+    if(weekMonday === mondayKey) return week;
+  }
+  return null;
+}
+
+// Get all unique weeks
+function getAllWeeks(){
+  return Object.keys(weekToDateMap).sort((a,b)=>{
+    const numA = parseInt(a.replace('Week ',''));
+    const numB = parseInt(b.replace('Week ',''));
+    return numA - numB;
+  });
+}
+
+// Get current roster for a manager (after applying all transactions)
+function getCurrentRoster(manager){
+  const baseRoster = rosterData[manager]?.Roster || [];
+  const currentRoster = new Set(baseRoster);
+  
+  // Apply transactions in order
+  transactionsData.forEach(txn => {
+    if(txn.Manager !== manager) return;
+    
+    const droppedId = teamToId[txn['Team Dropped']];
+    const addedId = teamToId[txn['Team Added']];
+    
+    if(droppedId) currentRoster.delete(droppedId);
+    if(addedId) currentRoster.add(addedId);
+  });
+  
+  return [...currentRoster];
+}
+
+(async function initialize(){
+  // Try to load data from server first, then fall back to localStorage
+  try {
+    const [teamIdRes, gameLogRes, rosterRes, txnRes] = await Promise.all([
+      fetch('/teamid.json'),
+      fetch('/gamelog.json'),
+      fetch('/rosters.json'),
+      fetch('/transactions.json')
+    ]);
+    
+    if(teamIdRes.ok) {
+      teamIdArray = await teamIdRes.json();
+      teamIdData = {};
+      teamIdArray.forEach(t=>teamIdData[t.TeamName]=t.team_id);
+      localStorage.setItem('teamIdData', JSON.stringify(teamIdArray));
+    }
+    
+    if(gameLogRes.ok) {
+      gameLogData = await gameLogRes.json();
+      localStorage.setItem('gameLogData', JSON.stringify(gameLogData));
+    }
+    
+    if(rosterRes.ok) {
+      rosterData = await rosterRes.json();
+      localStorage.setItem('rosterData', JSON.stringify(rosterData));
+    }
+    
+    if(txnRes.ok) {
+      transactionsData = await txnRes.json();
+      localStorage.setItem('transactionsData', JSON.stringify(transactionsData));
+    }
+  } catch(e) {
+    console.log('Loading from localStorage as fallback');
+    // Fall back to localStorage if server files aren't available
+    const savedTeamId = localStorage.getItem('teamIdData');
+    const savedGameLog = localStorage.getItem('gameLogData');
+    const savedRoster = localStorage.getItem('rosterData');
+    const savedTxn = localStorage.getItem('transactionsData');
+    
+    if(savedTeamId){ teamIdArray = JSON.parse(savedTeamId); teamIdData = {}; teamIdArray.forEach(t=>teamIdData[t.TeamName]=t.team_id); }
+    else{
+      teamIdArray = [
+        {TeamName:'Houston',team_id:113},{TeamName:'Gonzaga',team_id:102},{TeamName:'NC State',team_id:200},{TeamName:'Georgia',team_id:98}
+      ];
+      teamIdData = {}; teamIdArray.forEach(t=>teamIdData[t.TeamName]=t.team_id);
+    }
+    
+    if(savedGameLog){ gameLogData = JSON.parse(savedGameLog); }
+    else{
+      gameLogData = [];
+    }
+    
+    rosterData = savedRoster ? JSON.parse(savedRoster) : { 
+      JF: {"Roster": [], "Week 1": [4,160,11,59,197,252,326,66,253,184]},
+      JR: {"Roster": [], "Week 1": [13,118,126,277,150,190,274,142,255,22]},
+      JS: {"Roster": [], "Week 1": [98,125,113,328,200,104,74,85,102,209]},
+      GK: {"Roster": [], "Week 1": [86,234,294,62,73,57,65,249,247,71]}
+    };
+    
+    transactionsData = savedTxn ? JSON.parse(savedTxn) : [];
+  }
+  
+  buildWeekMapping();
+  updateIdToTeam();
+  displayAll();
+})();
+
+/***** HELPERS *****/
+function readableTextColor(hex){ try{ const h=hex.replace('#',''); const r=parseInt(h.slice(0,2),16)||0,g=parseInt(h.slice(2,4),16)||0,b=parseInt(h.slice(4,6),16)||0; const Y=0.2126*r+0.7152*g+0.0722*b; return Y>128?'#111':'#fff'; }catch(e){ return '#fff'; } }
+function badgeInitials(m){ const c=getManagerColor(m),tc=readableTextColor(c); return `<span class="badge" style="background:${c};color:${tc}">${m}</span>`; }
+function badgeName(m){ const c=getManagerColor(m),tc=readableTextColor(c); const label=getManagerName(m); return `<span class="badge" style="background:${c};color:${tc}">${label}</span>`; }
+function calculateSpreadCover(g){ if(!g.HOME__1||!g.AWAY__1||!g.SPREAD) return null; const home=+g.HOME__1,away=+g.AWAY__1,spread=+g.SPREAD; const margin=home-away; const favHome=g.FAV_ID===g.HOME_ID; return favHome ? (margin>spread) : (-margin>spread); }
+function getGamePoints(g, teamId){ if(!g.HOME__1||!g.AWAY__1||!g.SPREAD) return {points:0,covered:null}; const covered=calculateSpreadCover(g); const week = getWeekForDate(g.DATE); const manager=getManagerForTeam(teamId, week); const oppId=teamId===g.HOME_ID?g.AWAY_ID:g.HOME_ID; const oppManager=getManagerForTeam(oppId, week); const isFav=g.FAV_ID===teamId; const teamCovered=(isFav&&covered)||(!isFav&&!covered); if(manager===oppManager) return {points:0,covered:teamCovered}; if(oppManager) return {points:teamCovered?3:0,covered:teamCovered}; return {points:teamCovered?1:0,covered:teamCovered}; }
+
+// Get all teams from all weeks for a manager (full roster)
+function getFullRoster(manager){
+  const allTeams = new Set();
+  const weeks = rosterData[manager] || {};
+  Object.entries(weeks).forEach(([key, weekTeams]) => {
+    if(key === 'Roster') return; // Skip the base roster key
+    weekTeams.forEach(id => allTeams.add(id));
+  });
+  return [...allTeams];
+}
+
+/***** RENDERERS *****/
+function displayStandings(){
+  const s = {JF:{points:0,atsDiff:0,covers:0,total:0},JR:{points:0,atsDiff:0,covers:0,total:0},JS:{points:0,atsDiff:0,covers:0,total:0},GK:{points:0,atsDiff:0,covers:0,total:0}};
+  gameLogData.forEach(g=>{ 
+    if(!g.HOME__1||!g.AWAY__1||!g.SPREAD) return; 
+    const home=+g.HOME__1,away=+g.AWAY__1,spread=+g.SPREAD; 
+    const week = getWeekForDate(g.DATE);
+    if(!week) return;
+    [g.HOME_ID,g.AWAY_ID].forEach(t=>{ 
+      const m=getManagerForTeam(t, week); 
+      if(!m) return; 
+      const res=getGamePoints(g,t); 
+      s[m].points+=res.points; 
+      s[m].total+=1; 
+      if(res.covered) s[m].covers+=1; 
+      
+      // Calculate ATS diff for this team
+      const isHome = t === g.HOME_ID;
+      const isFav = g.FAV_ID === t;
+      const scoreDiff = isHome ? (home - away) : (away - home); // positive = team won
+      // ATS diff: how much they beat/missed the spread by
+      // If favorite: ATS diff = scoreDiff - spread (need to win by more than spread)
+      // If underdog: ATS diff = scoreDiff + spread (can lose by less than spread)
+      const atsDiff = isFav ? (scoreDiff - spread) : (scoreDiff + spread);
+      s[m].atsDiff += atsDiff;
+    }); 
+  });
+  const arr = Object.entries(s).map(([manager,stats])=>({manager,...stats})).sort((a,b)=> b.points!==a.points?b.points-a.points:b.atsDiff-a.atsDiff);
+  const tbody=document.querySelector('#standingsTable tbody'); if(!tbody) return; tbody.innerHTML='';
+  arr.forEach((row,i)=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td class="mono">${String(i+1).padStart(2,'0')}</td><td>${badgeName(row.manager)}</td><td class="mono"><strong>${row.points}</strong></td><td class="mono ${row.atsDiff>=0?'pos':'neg'}">${row.atsDiff>0?'+':''}${row.atsDiff.toFixed(1)}</td><td class="mono">${row.covers}-${row.total-row.covers}</td>`; tbody.appendChild(tr); });
+}
+
+function displayH2H(){
+  const managers=['JF','JR','JS','GK']; const rec={}; managers.forEach(m1=>{rec[m1]={}; managers.forEach(m2=>{ if(m1!==m2) rec[m1][m2]={w:0,l:0}; });});
+  gameLogData.forEach(g=>{ 
+    if(!g.HOME__1||!g.AWAY__1) return; 
+    const week = getWeekForDate(g.DATE);
+    if(!week) return;
+    const mH=getManagerForTeam(g.HOME_ID, week), mA=getManagerForTeam(g.AWAY_ID, week); 
+    if(mH&&mA&&mH!==mA){ 
+      const h=getGamePoints(g,g.HOME_ID).points; 
+      const a=getGamePoints(g,g.AWAY_ID).points; 
+      if(h>a){ rec[mH][mA].w++; rec[mA][mH].l++; } 
+      else { rec[mA][mH].w++; rec[mH][mA].l++; } 
+    }
+  });
+  const wrap=document.getElementById('h2hRecords'); if(!wrap) return; wrap.innerHTML='';
+  managers.forEach(m1=>{ const card=document.createElement('div'); card.className='card'; const rows=managers.filter(m2=>m2!==m1).map(m2=>`<div class="mono" style="display:flex;justify-content:space-between"><span>${badgeInitials(m2)}</span><span>${rec[m1][m2].w}-${rec[m1][m2].l}</span></div>`).join(''); card.innerHTML=`<div class="mono" style="color:var(--muted);margin-bottom:6px">${getManagerName(m1)} vs</div>${rows}`; wrap.appendChild(card); });
+}
+
+function displayWeeklyStandings(weekNum){
+  const week = `Week ${weekNum}`;
+  document.getElementById('currentWeekNum').textContent = weekNum;
+  
+  const weekStats = {JF:{weekPts:0,seasonPts:0,covers:0,total:0},JR:{weekPts:0,seasonPts:0,covers:0,total:0},JS:{weekPts:0,seasonPts:0,covers:0,total:0},GK:{weekPts:0,seasonPts:0,covers:0,total:0}};
+  
+  // Calculate season points up to this week
+  const allWeeks = getAllWeeks();
+  const weeksUpTo = allWeeks.slice(0, allWeeks.indexOf(week) + 1);
+  
+  gameLogData.forEach(g=>{ 
+    if(!g.HOME__1||!g.AWAY__1) return; 
+    const gameWeek = getWeekForDate(g.DATE);
+    if(!gameWeek || !weeksUpTo.includes(gameWeek)) return;
+    
+    [g.HOME_ID,g.AWAY_ID].forEach(t=>{ 
+      const m=getManagerForTeam(t, gameWeek); 
+      if(!m) return; 
+      
+      // Check if opponent was also in this manager's lineup (same manager game)
+      const oppId = t === g.HOME_ID ? g.AWAY_ID : g.HOME_ID;
+      const oppM = getManagerForTeam(oppId, gameWeek);
+      if(oppM === m) return; // Same manager game - don't count
+      
+      const res=getGamePoints(g,t); 
+      
+      if(gameWeek === week){
+        weekStats[m].weekPts+=res.points;
+        weekStats[m].total+=1;
+        if(res.covered) weekStats[m].covers+=1;
+      }
+      weekStats[m].seasonPts+=res.points;
+    }); 
+  });
+  
+  const arr = Object.entries(weekStats).map(([manager,stats])=>({manager,...stats})).sort((a,b)=> b.weekPts!==a.weekPts?b.weekPts-a.weekPts:b.seasonPts-a.seasonPts);
+  const tbody=document.querySelector('#weeklyStandingsTable tbody'); if(!tbody) return; tbody.innerHTML='';
+  arr.forEach((row,i)=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td class="mono">${String(i+1).padStart(2,'0')}</td><td>${badgeName(row.manager)}</td><td class="mono"><strong>${row.weekPts}</strong></td><td class="mono">${row.seasonPts}</td><td class="mono">${row.covers}-${row.total-row.covers}</td>`; tbody.appendChild(tr); });
+}
+
+function displayManagers(){
+  const container=document.getElementById('managersList'); if(!container) return; container.innerHTML='';
+  
+  if(currentManagerWeek === 'full'){
+    // Show CURRENT roster (after applying transactions) with season totals
+    ['JF','JR','JS','GK'].forEach(m=>{
+      const currentRoster = getCurrentRoster(m);
+      const teamStats={};
+      currentRoster.forEach(id=> teamStats[id]={pts:0,wins:0,losses:0});
+      
+      gameLogData.forEach(g=>{ 
+        if(!g.HOME__1||!g.AWAY__1) return; 
+        const week = getWeekForDate(g.DATE);
+        if(!week) return;
+        
+        [g.HOME_ID,g.AWAY_ID].forEach(t=>{ 
+          if(!currentRoster.includes(t)) return;
+          const lineupForWeek = rosterData[m][week] || [];
+          if(!lineupForWeek.includes(t)) return; // Only count if team was starting that week
+          
+          // Check if opponent was also in this manager's lineup (same manager game)
+          const oppId = t === g.HOME_ID ? g.AWAY_ID : g.HOME_ID;
+          const oppM = getManagerForTeam(oppId, week);
+          if(oppM === m) return; // Same manager game - don't count in record
+          
+          const res=getGamePoints(g,t); 
+          teamStats[t].pts+=res.points; 
+          if(res.covered) teamStats[t].wins++; 
+          else teamStats[t].losses++; 
+        }); 
+      });
+      
+      const sorted=Object.entries(teamStats).sort((a,b)=> b[1].pts!==a[1].pts?b[1].pts-a[1].pts:(b[1].wins-b[1].losses)-(a[1].wins-a[1].losses));
+      const rows=sorted.map(([id,st])=>`<tr data-team="${id}" data-m="${m}"><td>${teamWithLogo(id, idToTeam[id]||id)}</td><td class="mono"><strong>${st.pts}</strong></td><td class="mono">${st.wins}-${st.losses}</td></tr>`).join('');
+      const card=document.createElement('div'); card.className='card'; card.innerHTML=`<div style="margin-bottom:8px;font-weight:600">${getManagerName(m)} <span style="color:var(--muted);font-size:11px">(${currentRoster.length} teams)</span></div><table><thead><tr><th>Team</th><th>Points</th><th>Record</th></tr></thead><tbody>${rows}</tbody></table>`; container.appendChild(card);
+    });
+  } else {
+    // Show specific week's lineup only - with ONLY that week's points and record
+    ['JF','JR','JS','GK'].forEach(m=>{
+      const weekLineup = rosterData[m][currentManagerWeek] || [];
+      const teamStats={};
+      weekLineup.forEach(id=> teamStats[id]={pts:0,wins:0,losses:0});
+      
+      gameLogData.forEach(g=>{ 
+        if(!g.HOME__1||!g.AWAY__1) return; 
+        const week = getWeekForDate(g.DATE);
+        // Only count games from the selected week
+        if(week !== currentManagerWeek) return;
+        
+        [g.HOME_ID,g.AWAY_ID].forEach(t=>{ 
+          if(!weekLineup.includes(t)) return;
+          
+          // Check if opponent was also in this manager's lineup (same manager game)
+          const oppId = t === g.HOME_ID ? g.AWAY_ID : g.HOME_ID;
+          const oppM = getManagerForTeam(oppId, week);
+          if(oppM === m) return; // Same manager game - don't count in record
+          
+          const res=getGamePoints(g,t); 
+          teamStats[t].pts+=res.points; 
+          if(res.covered) teamStats[t].wins++; 
+          else teamStats[t].losses++; 
+        }); 
+      });
+      
+      const sorted=Object.entries(teamStats).sort((a,b)=> b[1].pts!==a[1].pts?b[1].pts-a[1].pts:(b[1].wins-b[1].losses)-(a[1].wins-a[1].losses));
+      const rows=sorted.map(([id,st])=>`<tr data-team="${id}" data-m="${m}"><td>${teamWithLogo(id, idToTeam[id]||id)}</td><td class="mono"><strong>${st.pts}</strong></td><td class="mono">${st.wins}-${st.losses}</td></tr>`).join('');
+      const card=document.createElement('div'); card.className='card'; card.innerHTML=`<div style="margin-bottom:8px;font-weight:600">${getManagerName(m)} - ${currentManagerWeek}</div><table><thead><tr><th>Team</th><th>Points</th><th>Record</th></tr></thead><tbody>${rows}</tbody></table>`; container.appendChild(card);
+    });
+  }
+  
+  container.querySelectorAll('tr[data-team]')?.forEach(r=>r.addEventListener('click',()=>{ const teamId=+r.dataset.team; const manager=r.dataset.m; showTeamDetail(teamId,manager); }));
+}
+
+function showTeamDetail(teamId, manager){
+  const name=idToTeam[teamId]||teamId; const games=gameLogData.filter(g=>g.HOME_ID===teamId||g.AWAY_ID===teamId); let totalPts=0,totalDiff=0;
+  let totalWins=0, totalLosses=0;
+  const rows=games.map(g=>{ 
+    if(!g.HOME__1||!g.AWAY__1){ 
+      const isHome=g.HOME_ID===teamId; 
+      const oppId=isHome?g.AWAY_ID:g.HOME_ID; 
+      const opp=idToTeam[oppId]||oppId; 
+      const week = getWeekForDate(g.DATE);
+      const oppM=week ? getManagerForTeam(oppId, week) : null;
+      const timeDisplay = (g.TIME && g.TIME.trim()) ? `<td class="mono">${g.TIME}</td>` : '<td class="muted">TBD</td>';
+      return `<tr><td>${g.DATE}</td>${timeDisplay}<td>${isHome?'vs':'@'} ${teamWithLogo(oppId, opp)} ${oppM?badgeInitials(oppM):''}</td><td class="muted" colspan="4">Scheduled</td></tr>`; 
+    } 
+    const isHome=g.HOME_ID===teamId; 
+    const oppId=isHome?g.AWAY_ID:g.HOME_ID; 
+    const opp=idToTeam[oppId]||oppId; 
+    const week = getWeekForDate(g.DATE);
+    
+    // Check if this team was in the manager's lineup this week
+    const teamInLineup = week && rosterData[manager]?.[week]?.includes(teamId);
+    
+    // Check if opponent was in any manager's lineup this week (returns the manager if so)
+    const oppM = week ? getManagerForTeam(oppId, week) : null;
+    
+    const ts=isHome?+g.HOME__1:+g.AWAY__1; 
+    const os=isHome?+g.AWAY__1:+g.HOME__1; 
+    const diff=ts-os; 
+    const won=diff>0; 
+    const res=getGamePoints(g,teamId); 
+    const isFav=g.FAV_ID===teamId; 
+    const spreadDisplay=g.SPREAD?`${isFav?'-':'+'}`+g.SPREAD:'—'; 
+    
+    // Determine what to show in points column and whether to count in record
+    let ptsDisplay;
+    let countInRecord = false;
+    
+    if(!teamInLineup){
+      // Team was not in lineup this week - don't count in record
+      ptsDisplay = `<span class="muted">N/A</span> <span class="info-icon" title="Not in lineup.">ⓘ</span>`;
+    } else if(oppM === manager){
+      // Opponent was ALSO in this same manager's lineup this week - don't count in record
+      ptsDisplay = `<span class="muted">N/A</span> <span class="info-icon" title="Same manager.">ⓘ</span>`;
+    } else {
+      // Normal case - show actual points and count in record
+      totalPts+=res.points; 
+      countInRecord = true;
+      ptsDisplay = `<strong class="${res.covered?'pos':'neg'}">${res.points}</strong>`;
+    }
+    
+    // Only count toward record if this game counts
+    if(countInRecord){
+      if(res.covered) totalWins++;
+      else totalLosses++;
+    }
+    
+    totalDiff+=diff; 
+    return `<tr><td>${g.DATE}</td><td></td><td>${isHome?'vs':'@'} ${teamWithLogo(oppId, opp)} ${oppM?badgeInitials(oppM):''}</td><td class="${won?'pos':'neg'} mono">${won?'W':'L'} ${ts}-${os}</td><td class="mono ${diff>=0?'pos':'neg'}">${diff>0?'+':''}${diff}</td><td class="mono muted">${spreadDisplay}</td><td class="mono">${ptsDisplay}</td></tr>`; 
+  }).join('');
+  const box=document.getElementById('teamDetailContent'); if(!box) return; box.innerHTML=`<h2 style="margin:0 0 8px 0">${teamWithLogo(teamId, name)} ${badgeInitials(manager)} <span class="muted" style="margin-left:6px">(${getManagerName(manager)})</span></h2><div style="margin-bottom:12px;font-size:13px"><span class="mono"><strong>${totalPts}</strong> pts</span> · <span class="mono">${totalWins}-${totalLosses} ATS</span></div><table><thead><tr><th>Date</th><th>Time</th><th>Opponent</th><th>Result</th><th>Diff</th><th>Spread</th><th>Pts</th></tr></thead><tbody>${rows}</tbody></table>`; showPage('teamDetail');
+}
+
+function displaySchedule(){
+  const weeks={}; gameLogData.forEach(g=>{ const d=new Date(g.DATE); if(isNaN(d)) return; const monday=new Date(d); monday.setDate(d.getDate()-((d.getDay()+6)%7)); const key=monday.toISOString().split('T')[0]; (weeks[key] ||= []).push(g); });
+  const keys=Object.keys(weeks).sort(); const sel=document.getElementById('weekSelector'); const content=document.getElementById('scheduleContent'); if(!sel||!content) return; sel.innerHTML=''; content.innerHTML='';
+  function renderWeek(k){ 
+    content.innerHTML=''; 
+    const days={}; 
+    weeks[k].forEach(g=>{ (days[g.DATE] ||= []).push(g); }); 
+    Object.keys(days).sort().forEach(date=>{ 
+      // Sort games by time for each date
+      days[date].sort((a, b) => {
+        const aHasTime = a.TIME && a.TIME.trim();
+        const bHasTime = b.TIME && b.TIME.trim();
+        
+        // Games with times come before games without times
+        if (aHasTime && !bHasTime) return -1;
+        if (!aHasTime && bHasTime) return 1;
+        if (!aHasTime && !bHasTime) return 0;
+        
+        // Both have times - convert to comparable format
+        const parseTime = (timeStr) => {
+          const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+          if (!match) return 0;
+          let hours = parseInt(match[1]);
+          const minutes = parseInt(match[2]);
+          const isPM = match[3].toUpperCase() === 'PM';
+          
+          // Convert to 24-hour format
+          if (isPM && hours !== 12) hours += 12;
+          if (!isPM && hours === 12) hours = 0;
+          
+          return hours * 60 + minutes; // Return total minutes since midnight
+        };
+        
+        return parseTime(a.TIME) - parseTime(b.TIME);
+      });
+      
+      // Format date as "Tuesday, November 18"
+      const dateObj = new Date(date);
+      const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+      
+      const dateCard=document.createElement('div'); 
+      dateCard.className='card'; 
+      dateCard.innerHTML=`<div class="mono" style="color:var(--fg);margin-bottom:8px;font-weight:600">${formattedDate}</div><div class="games-grid" id="games-${date}"></div>`; 
+      content.appendChild(dateCard); 
+      const gamesGrid=document.getElementById(`games-${date}`); 
+      days[date].forEach(g=>{ 
+        const week = getWeekForDate(g.DATE);
+        const mA=week ? getManagerForTeam(g.AWAY_ID, week) : null;
+        const mH=week ? getManagerForTeam(g.HOME_ID, week) : null;
+        const awayName=idToTeam[g.AWAY_ID]||g.AWAY; 
+        const homeName=idToTeam[g.HOME_ID]||g.HOME; 
+        const finished=g.HOME__1&&g.AWAY__1; 
+        const awayScore=finished?+g.AWAY__1:null; 
+        const homeScore=finished?+g.HOME__1:null; 
+        const awayWon=finished&&awayScore>homeScore; 
+        const homeWon=finished&&homeScore>awayScore; 
+        const isLeague=mA&&mH; 
+        const gameCard=document.createElement('div'); 
+        gameCard.className='game-card'; 
+        let spreadInfo=''; 
+        if(finished&&g.SPREAD){ 
+          const covered=calculateSpreadCover(g); 
+          const favIsHome=g.FAV_ID===g.HOME_ID; 
+          const favIsAway=g.FAV_ID===g.AWAY_ID; 
+          const awayCovered=favIsAway?covered:!covered; 
+          const homeCovered=favIsHome?covered:!covered; 
+          spreadInfo=`<div style="font-size:11px;color:var(--fg);margin-top:2px">${favIsAway?'-':'+'}<span>${g.SPREAD}</span></div>`; 
+          const awaySpread=`<div style="font-size:11px;color:var(--fg);margin-top:2px">${favIsAway?'-':'+'}<span>${g.SPREAD}</span>${awayCovered?` <span style="color:var(--pos)">✓</span>`:''}</div>`; 
+          const homeSpread=`<div style="font-size:11px;color:var(--fg);margin-top:2px">${favIsHome?'-':'+'}<span>${g.SPREAD}</span>${homeCovered?` <span style="color:var(--pos)">✓</span>`:''}</div>`; 
+          let teamsHTML='<div class="game-teams">'; 
+          teamsHTML+=`<div class="game-team${awayWon?' winner':''}"><div><div class="game-team-name">${teamWithLogo(g.AWAY_ID, awayName)}${mA?' '+badgeInitials(mA):''}</div>${awaySpread}</div>${finished?`<div class="game-score">${awayScore}</div>`:''}</div>`; 
+          teamsHTML+=`<div class="game-team${homeWon?' winner':''}"><div><div class="game-team-name">${teamWithLogo(g.HOME_ID, homeName)}${mH?' '+badgeInitials(mH):''}</div>${homeSpread}</div>${finished?`<div class="game-score">${homeScore}</div>`:''}</div>`; 
+          teamsHTML+='</div>'; 
+          let infoHTML='<div class="game-info">'; 
+          if(isLeague){ infoHTML+=`<span class="badge">League</span>`; } 
+          else { infoHTML+=`<span></span>`; } 
+          infoHTML+=`<span class="mono">FINAL</span>`; 
+          infoHTML+='</div>'; 
+          gameCard.innerHTML=teamsHTML+infoHTML; 
+        } else { 
+          // Upcoming game or game without spread info yet
+          const favIsHome=g.FAV_ID===g.HOME_ID; 
+          const favIsAway=g.FAV_ID===g.AWAY_ID;
+          const awaySpread=g.SPREAD?`<div style="font-size:11px;color:var(--fg);margin-top:2px">${favIsAway?'-':'+'}<span>${g.SPREAD}</span></div>`:'';
+          const homeSpread=g.SPREAD?`<div style="font-size:11px;color:var(--fg);margin-top:2px">${favIsHome?'-':'+'}<span>${g.SPREAD}</span></div>`:'';
+          
+          let teamsHTML='<div class="game-teams">'; 
+          teamsHTML+=`<div class="game-team${awayWon?' winner':''}"><div><div class="game-team-name">${teamWithLogo(g.AWAY_ID, awayName)}${mA?' '+badgeInitials(mA):''}</div>${awaySpread}</div>${finished?`<div class="game-score">${awayScore}</div>`:''}</div>`; 
+          teamsHTML+=`<div class="game-team${homeWon?' winner':''}"><div><div class="game-team-name">${teamWithLogo(g.HOME_ID, homeName)}${mH?' '+badgeInitials(mH):''}</div>${homeSpread}</div>${finished?`<div class="game-score">${homeScore}</div>`:''}</div>`; 
+          teamsHTML+='</div>'; 
+          let infoHTML='<div class="game-info">'; 
+          if(isLeague){ infoHTML+=`<span class="badge">League</span>`; } 
+          else { infoHTML+=`<span></span>`; } 
+          if(finished){ infoHTML+=`<span class="mono">FINAL</span>`; } 
+          else if(g.TIME && g.TIME.trim()){ infoHTML+=`<span class="mono">${g.TIME}</span>`; }
+          else { infoHTML+=`<span class="mono">—</span>`; } 
+          infoHTML+='</div>'; 
+          gameCard.innerHTML=teamsHTML+infoHTML; 
+        } 
+        gamesGrid.appendChild(gameCard); 
+      }); 
+    }); 
+  }
+  keys.forEach((k,i)=>{ const b=document.createElement('button'); b.className='chip'+(i===0?' active':''); b.textContent=`Week ${i+1}`; b.addEventListener('click',()=>{ [...sel.children].forEach(c=>c.classList.remove('active')); b.classList.add('active'); renderWeek(k); }); sel.appendChild(b); }); if(keys[0]) renderWeek(keys[0]);
+}
+
+/***** TRANSACTIONS *****/
+function displayTransactions(){
+  const container = document.getElementById('transactionsList');
+  if(!container) return;
+  
+  // Filter transactions
+  let filtered = transactionsData;
+  if(currentTxnFilter !== 'All'){
+    filtered = transactionsData.filter(t => t.Manager === currentTxnFilter);
+  }
+  
+  if(filtered.length === 0){
+    container.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:20px">No transactions found.</td></tr>';
+    return;
+  }
+  
+  // Sort by date (newest first)
+  const sorted = [...filtered].sort((a, b) => {
+    const dateA = new Date(a.Date);
+    const dateB = new Date(b.Date);
+    return dateB - dateA;
+  });
+  
+  let html = '';
+  sorted.forEach(txn => {
+    const droppedId = teamToId[txn['Team Dropped']];
+    const addedId = teamToId[txn['Team Added']];
+    
+    const droppedLogo = droppedId ? `<img src="logos/${droppedId}.webp" alt="" class="team-logo" onerror="this.style.display='none'"/>` : '';
+    const addedLogo = addedId ? `<img src="logos/${addedId}.webp" alt="" class="team-logo" onerror="this.style.display='none'"/>` : '';
+    
+    html += `
+      <tr>
+        <td class="mono">${txn.Date}</td>
+        <td>${badgeInitials(txn.Manager)}</td>
+        <td><span class="badge">${txn.Conference}</span></td>
+        <td><div class="team-cell">${droppedLogo}${txn['Team Dropped']}</div></td>
+        <td><div class="team-cell">${addedLogo}${txn['Team Added']}</div></td>
+      </tr>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+// Transaction filter buttons
+['All', 'JF', 'JR', 'JS', 'GK'].forEach(filter => {
+  const btnId = filter === 'All' ? 'txnAllBtn' : `txn${filter}Btn`;
+  document.getElementById(btnId)?.addEventListener('click', () => {
+    currentTxnFilter = filter;
+    document.querySelectorAll('#transactions .chip').forEach(c => c.classList.remove('active'));
+    document.getElementById(btnId)?.classList.add('active');
+    displayTransactions();
+  });
+});
+
+/***** SETTINGS *****/
+function displayTeamSelection(){ 
+  const container=document.getElementById('teamSelectionContent'); 
+  if(!container) return; 
+  container.innerHTML = '<p style="font-size:12px;color:var(--muted)">Weekly lineups are managed via rosters.json file.</p>';
+}
+
+function displayManagerSettings(){ const wrap=document.getElementById('managerSettings'); if(!wrap) return; const managers=['JF','JR','JS','GK']; wrap.innerHTML = managers.map(m=>{ const meta=managerMeta[m]||{name:m,color:'#444444'}; const tc=readableTextColor(meta.color); return `<div class='form-row'><label class='label' style='font-size:12px'><span class='badge' id='badge-${m}' style='background:${meta.color};color:${tc}'>${m}</span></label><input class='input' type='text' id='name-${m}' value='${meta.name}' placeholder='Display name for ${m}' /><input class='input' type='color' id='color-${m}' value='${meta.color}' /></div>`; }).join(''); managers.forEach(m=>{ const colorInput=document.getElementById(`color-${m}`); const badge=document.getElementById(`badge-${m}`); colorInput?.addEventListener('input',e=>{ const v=e.target.value; badge.style.background=v; badge.style.color=readableTextColor(v); }); }); }
+
+document.getElementById('saveManagers')?.addEventListener('click', ()=>{ ['JF','JR','JS','GK'].forEach(m=>{ const name=(document.getElementById(`name-${m}`)?.value)||m; const color=(document.getElementById(`color-${m}`)?.value)||'#444444'; managerMeta[m]={name,color}; }); localStorage.setItem('managerMeta', JSON.stringify(managerMeta)); alert('Manager settings saved.'); displayAll(); });
+
+document.getElementById('randomColors')?.addEventListener('click', ()=>{ const base=Math.floor(Math.random()*360); ['JF','JR','JS','GK'].forEach((m,i)=>{ const h=(base+i*90)%360, s=70, l=45; const color=hslToHex(h,s,l); const input=document.getElementById(`color-${m}`); const badge=document.getElementById(`badge-${m}`); if(input){ input.value=color; } if(badge){ badge.style.background=color; badge.style.color=readableTextColor(color);} }); });
+
+document.getElementById('resetColors')?.addEventListener('click', ()=>{ const defaults={JF:'#ffffff',JR:'#ffffff',JS:'#ffffff',GK:'#ffffff'}; Object.entries(defaults).forEach(([m,color])=>{ const input=document.getElementById(`color-${m}`); const badge=document.getElementById(`badge-${m}`); if(input){ input.value=color; } if(badge){ badge.style.background=color; badge.style.color=readableTextColor(color);} }); });
+
+function hslToHex(h,s,l){ s/=100; l/=100; const k=n=>(n+h/30)%12; const a=s*Math.min(l,1-l); const f=n=>l-a*Math.max(-1, Math.min(k(n)-3, Math.min(9-k(n),1))); const toHex=x=>Math.round(x*255).toString(16).padStart(2,'0'); return `#${toHex(f(0))}${toHex(f(8))}${toHex(f(4))}`; }
+
+/***** FILES *****/
+async function loadDataFiles(){ 
+  const gf=document.getElementById('gamelogFile')?.files?.[0]; 
+  const tf=document.getElementById('teamidFile')?.files?.[0]; 
+  const rf=document.getElementById('rosterFile')?.files?.[0]; 
+  try{ 
+    if(gf){ const txt=await gf.text(); gameLogData=JSON.parse(txt); localStorage.setItem('gameLogData', JSON.stringify(gameLogData)); } 
+    if(tf){ const txt=await tf.text(); teamIdArray=JSON.parse(txt); teamIdData={}; teamIdArray.forEach(t=>teamIdData[t.TeamName]=t.team_id); localStorage.setItem('teamIdData', JSON.stringify(teamIdArray)); } 
+    if(rf){ const txt=await rf.text(); rosterData=JSON.parse(txt); localStorage.setItem('rosterData', JSON.stringify(rosterData)); } 
+    updateIdToTeam(); 
+    buildWeekMapping();
+    alert('Files loaded.'); 
+    displayAll(); 
+  }catch(err){ alert('Error loading: '+err.message); } 
+}
+
+document.getElementById('loadFiles')?.addEventListener('click', loadDataFiles);
+
+document.getElementById('resetLS')?.addEventListener('click', ()=>{ ['teamIdData','gameLogData','activeRosters','managerMeta','rosterData','transactionsData'].forEach(k=>localStorage.removeItem(k)); location.reload(); });
+
+/***** VIEW TOGGLES *****/
+document.getElementById('seasonViewBtn')?.addEventListener('click', ()=>{
+  document.getElementById('seasonView').style.display='block';
+  document.getElementById('weeklyView').style.display='none';
+  document.getElementById('seasonViewBtn').classList.add('active');
+  document.getElementById('weeklyViewBtn').classList.remove('active');
+});
+
+document.getElementById('weeklyViewBtn')?.addEventListener('click', ()=>{
+  document.getElementById('seasonView').style.display='none';
+  document.getElementById('weeklyView').style.display='block';
+  document.getElementById('seasonViewBtn').classList.remove('active');
+  document.getElementById('weeklyViewBtn').classList.add('active');
+  setupWeeklyStandings();
+});
+
+function setupWeeklyStandings(){
+  const weeks = getAllWeeks();
+  const selector = document.getElementById('weekStandingsSelector');
+  if(!selector) return;
+  selector.innerHTML = '';
+  weeks.forEach((week, i) => {
+    const weekNum = i + 1;
+    const b = document.createElement('button');
+    b.className = 'chip' + (i === weeks.length - 1 ? ' active' : '');
+    b.textContent = `Week ${weekNum}`;
+    b.addEventListener('click', () => {
+      [...selector.children].forEach(c => c.classList.remove('active'));
+      b.classList.add('active');
+      displayWeeklyStandings(weekNum);
+    });
+    selector.appendChild(b);
+  });
+  if(weeks.length > 0) displayWeeklyStandings(weeks.length);
+}
+
+// Managers page week selector
+function setupManagerWeekSelector(){
+  const weeks = getAllWeeks();
+  const selector = document.getElementById('weekManagerSelector');
+  if(!selector) return;
+  selector.innerHTML = '';
+  
+  weeks.forEach((week, i) => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.textContent = week;
+    b.addEventListener('click', () => {
+      document.getElementById('fullRosterBtn').classList.remove('active');
+      [...selector.children].forEach(c => c.classList.remove('active'));
+      b.classList.add('active');
+      currentManagerWeek = week;
+      displayManagers();
+    });
+    selector.appendChild(b);
+  });
+}
+
+document.getElementById('fullRosterBtn')?.addEventListener('click', ()=>{
+  currentManagerWeek = 'full';
+  document.getElementById('fullRosterBtn').classList.add('active');
+  [...document.getElementById('weekManagerSelector').children].forEach(c => c.classList.remove('active'));
+  displayManagers();
+});
+
+/***** BOOT *****/
+function displayAll(){ 
+  displayStandings(); 
+  displayH2H(); 
+  displayManagers(); 
+  displaySchedule(); 
+  displayTransactions();
+  displayTeamSelection(); 
+  displayManagerSettings(); 
+  setupManagerWeekSelector();
+}
+
+displayAll();
+
+/***** KENPOM *****/
+let kenpomData=[], kenpomSort={column:null,direction:'asc'}, kenpomConferenceFilter='';
+
+document.getElementById('loadKenpom')?.addEventListener('click', loadKenpomRankings);
+
+// Conference filter change handler
+document.getElementById('kenpomConference')?.addEventListener('change', (e) => {
+  kenpomConferenceFilter = e.target.value;
+  if(kenpomData.length > 0){
+    displayKenpomTable(kenpomData);
+  }
+});
+
+async function loadKenpomRankings(){
+  const season=document.getElementById('kenpomSeason').value;
+  const statsDiv=document.getElementById('kenpomStats');
+  const tableDiv=document.getElementById('kenpomTable');
+  
+  tableDiv.innerHTML='<div class="kenpom-loading"><div class="kenpom-spinner"></div><p style="color:var(--muted)">Loading rankings...</p></div>';
+  statsDiv.innerHTML='';
+  
+  try{
+    const response=await fetch(`/api/rankings?y=${season}`);
+    
+    if(!response.ok){
+      throw new Error(`API Error: ${response.status}`);
+    }
+    
+    const data=await response.json();
+    kenpomData=data;
+    kenpomConferenceFilter=''; // Reset filter on new load
+    document.getElementById('kenpomConference').value = '';
+    populateConferenceDropdown(data);
+    displayKenpomStats(data);
+    displayKenpomTable(data);
+  }catch(error){
+    tableDiv.innerHTML=`<div class="kenpom-error">Error loading data: ${error.message}<br/><small style="font-size:10px;opacity:0.8">Contact league administrator if this persists.</small></div>`;
+  }
+}
+
+function populateConferenceDropdown(data){
+  const select = document.getElementById('kenpomConference');
+  if(!select) return;
+  
+  // Get unique conferences and sort them
+  const conferences = [...new Set(data.map(t => t.ConfShort).filter(c => c))].sort();
+  
+  // Clear existing options except "All Conferences"
+  select.innerHTML = '<option value="">All Conferences</option>';
+  
+  conferences.forEach(conf => {
+    const option = document.createElement('option');
+    option.value = conf;
+    option.textContent = conf;
+    select.appendChild(option);
+  });
+}
+
+function displayKenpomStats(data){
+  // Stats cards removed per user request
+}
+
+function displayKenpomTable(data){
+  const tableDiv=document.getElementById('kenpomTable');
+  if(!data||data.length===0){
+    tableDiv.innerHTML='<div class="kenpom-error">No data available</div>';
+    return;
+  }
+  
+  // Apply conference filter
+  let filteredData = data;
+  if(kenpomConferenceFilter){
+    filteredData = data.filter(t => t.ConfShort === kenpomConferenceFilter);
+  }
+  
+  if(filteredData.length === 0){
+    tableDiv.innerHTML='<div class="kenpom-error">No teams found in this conference</div>';
+    return;
+  }
+  
+  // Create reverse lookup: TeamName -> team_id
+  const teamNameToId = {};
+  teamIdArray.forEach(t => {
+    teamNameToId[t.TeamName] = t.team_id;
+  });
+  
+  let html='<table><thead><tr>';
+  html+='<th class="sortable" onclick="sortKenpom(\'RankAdjEM\')">Rank</th>';
+  html+='<th>Team</th>';
+  html+='<th class="sortable" onclick="sortKenpom(\'ID\')">ID</th>';
+  html+='<th class="sortable" onclick="sortKenpom(\'GRIMM\')">GRIMM</th>';
+  html+='<th class="sortable" onclick="sortKenpom(\'ConfShort\')">Conf</th>';
+  html+='<th class="sortable" onclick="sortKenpom(\'Wins\')">Record</th>';
+  html+='<th class="sortable" onclick="sortKenpom(\'AdjEM\')">AdjEM</th>';
+  html+='<th class="sortable" onclick="sortKenpom(\'AdjOE\')">AdjO</th>';
+  html+='<th class="sortable" onclick="sortKenpom(\'AdjDE\')">AdjD</th>';
+  html+='<th class="sortable" onclick="sortKenpom(\'AdjTempo\')">Tempo</th>';
+  html+='<th class="sortable" onclick="sortKenpom(\'Luck\')">Luck</th>';
+  html+='<th class="sortable" onclick="sortKenpom(\'SOS\')">SOS</th>';
+  html+='</tr></thead><tbody>';
+  
+  // Get current rosters for all managers
+  const currentRosters = {};
+  ['JF','JR','JS','GK'].forEach(m => {
+    currentRosters[m] = getCurrentRoster(m);
+  });
+  
+  filteredData.forEach((team)=>{
+    // Get team_id from our teamid.json mapping
+    const teamId = teamNameToId[team.TeamName];
+    const logoPath = teamId ? `logos/${teamId}.webp` : '';
+    
+    // Find which manager owns this team (using current roster after transactions)
+    let ownerInitials = '';
+    if (teamId) {
+      for (const [manager, roster] of Object.entries(currentRosters)) {
+        if (roster.includes(teamId)) {
+          ownerInitials = manager;
+          break;
+        }
+      }
+    }
+    
+    const record=`${team.Wins||0}-${team.Losses||0}`;
+    const adjEMClass=parseFloat(team.AdjEM)>0?'pos':'neg';
+    const luckClass=parseFloat(team.Luck)>0?'pos':'neg';
+    
+    html+=`<tr>`;
+    html+=`<td class="mono" style="font-weight:700">${team.RankAdjEM||'-'}</td>`;
+    html+=`<td><div class="kenpom-team-cell">`;
+    if(logoPath) {
+      html+=`<img src="${logoPath}" class="kenpom-team-logo" onerror="this.style.display='none'" alt="${team.TeamName}"/>`;
+    }
+    html+=`<div class="kenpom-team-info"><span class="kenpom-team-name">${team.TeamName||'Unknown'}</span></div></div></td>`;
+    html+=`<td class="mono">${teamId||'-'}</td>`;
+    html+=`<td><span class="badge">${ownerInitials||''}</span></td>`;
+    html+=`<td><span class="badge">${team.ConfShort||'N/A'}</span></td>`;
+    html+=`<td class="mono">${record}</td>`;
+    html+=`<td class="mono ${adjEMClass}">${parseFloat(team.AdjEM||0).toFixed(2)}</td>`;
+    html+=`<td class="mono">${parseFloat(team.AdjOE||0).toFixed(1)}</td>`;
+    html+=`<td class="mono">${parseFloat(team.AdjDE||0).toFixed(1)}</td>`;
+    html+=`<td class="mono">${parseFloat(team.AdjTempo||0).toFixed(1)}</td>`;
+    html+=`<td class="mono ${luckClass}">${parseFloat(team.Luck||0).toFixed(3)}</td>`;
+    html+=`<td class="mono">${parseFloat(team.SOS||0).toFixed(2)}</td>`;
+    html+=`</tr>`;
+  });
+  
+  html+='</tbody></table>';
+  tableDiv.innerHTML=html;
+  updateKenpomSortIndicators();
+}
+
+function sortKenpom(column){
+  if(kenpomSort.column===column){
+    kenpomSort.direction=kenpomSort.direction==='asc'?'desc':'asc';
+  }else{
+    kenpomSort.column=column;
+    kenpomSort.direction='asc';
+  }
+  
+  // Create reverse lookup: TeamName -> team_id
+  const teamNameToId = {};
+  teamIdArray.forEach(t => {
+    teamNameToId[t.TeamName] = t.team_id;
+  });
+  
+  // Get current rosters for all managers
+  const currentRosters = {};
+  ['JF','JR','JS','GK'].forEach(m => {
+    currentRosters[m] = getCurrentRoster(m);
+  });
+  
+  // Add GRIMM owner data and ID to each team for sorting
+  const dataWithOwner = kenpomData.map(team => {
+    const teamId = teamNameToId[team.TeamName];
+    let ownerInitials = '';
+    if (teamId) {
+      for (const [manager, roster] of Object.entries(currentRosters)) {
+        if (roster.includes(teamId)) {
+          ownerInitials = manager;
+          break;
+        }
+      }
+    }
+    return {...team, ID: teamId || 0, GRIMM: ownerInitials};
+  });
+  
+  const sortedData=[...dataWithOwner].sort((a,b)=>{
+    let aVal=a[column];
+    let bVal=b[column];
+    
+    if(!isNaN(parseFloat(aVal))&&!isNaN(parseFloat(bVal))){
+      aVal=parseFloat(aVal);
+      bVal=parseFloat(bVal);
+    }
+    
+    if(aVal===undefined||aVal===null||aVal==='') return 1;
+    if(bVal===undefined||bVal===null||bVal==='') return -1;
+    
+    if(kenpomSort.direction==='asc'){
+      return aVal>bVal?1:-1;
+    }else{
+      return aVal<bVal?1:-1;
+    }
+  });
+  
+  displayKenpomTable(sortedData);
+}
+
+function updateKenpomSortIndicators(){
+  document.querySelectorAll('#kenpomTable th').forEach(th=>th.classList.remove('sorted-asc','sorted-desc'));
+  
+  const columnMap={
+    'RankAdjEM':0,
+    'ID':2,
+    'GRIMM':3,
+    'ConfShort':4,
+    'Wins':5,
+    'AdjEM':6,
+    'AdjOE':7,
+    'AdjDE':8,
+    'AdjTempo':9,
+    'Luck':10,
+    'SOS':11
+  };
+  
+  const headers=Array.from(document.querySelectorAll('#kenpomTable th'));
+  const index=columnMap[kenpomSort.column];
+  if(index!==undefined&&headers[index]){
+    headers[index].classList.add(`sorted-${kenpomSort.direction}`);
+  }
+}
+</script>
+</body>
+</html>
